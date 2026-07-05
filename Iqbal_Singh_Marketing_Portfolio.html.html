@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GutFlo — 3 Flavours</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #080808;
+  --white: #f2f0ea;
+}
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Grain */
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:0.035;
+  pointer-events:none;
+  z-index:999;
+}
+
+/* ── HEADER ── */
+header {
+  text-align: center;
+  padding: 52px 24px 36px;
+  position: relative;
+}
+.header-badge {
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 100px;
+  padding: 5px 16px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 16px;
+}
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 12vw, 96px);
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  color: var(--white);
+}
+h1 span { color: #b8ff3a; }
+.sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── FLAVOUR TABS ── */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 24px 40px;
+}
+.tab {
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: all 0.3s ease;
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.4);
+}
+.tab.active, .tab:hover { color: #080808; }
+
+/* ── SCENE AREA ── */
+.scene-outer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px 80px;
+}
+
+.flavour-scene {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 380px;
+  animation: sceneFadeIn 0.5s ease both;
+}
+.flavour-scene.active { display: flex; }
+
+@keyframes sceneFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════
+   3D BOX — outer carton
+══════════════════════════════════════ */
+.box-wrap {
+  perspective: 900px;
+  width: 260px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box-3d {
+  width: 200px;
+  height: 220px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(12deg) rotateY(-22deg);
+  animation: boxFloat 4s ease-in-out infinite;
+}
+
+@keyframes boxFloat {
+  0%,100% { transform: rotateX(12deg) rotateY(-22deg) translateY(0); }
+  50%      { transform: rotateX(12deg) rotateY(-22deg) translateY(-10px); }
+}
+
+.box-face {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+/* FRONT face */
+.box-front {
+  width: 200px;
+  height: 220px;
+  left: 0; top: 0;
+  transform: translateZ(36px);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 12px 12px;
+}
+.box-front::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background: linear-gradient(160deg,rgba(255,255,255,0.12) 0%,transparent 50%);
+  pointer-events:none;
+}
+
+/* RIGHT side */
+.box-right {
+  width: 72px;
+  height: 220px;
+  top: 0;
+  left: 200px;
+  transform-origin: left center;
+  transform: rotateY(90deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 6px;
+}
+.box-right-text {
+  font-family:'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  color: rgba(255,255,255,0.6);
+}
+
+/* TOP face */
+.box-top {
+  width: 200px;
+  height: 72px;
+  top: -72px; left: 0;
+  transform-origin: bottom center;
+  transform: rotateX(90deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.box-top-text {
+  font-family:'Bebas Neue',sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: rgba(255,255,255,0.4);
+}
+
+/* Box front internals */
+.box-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  color: #fff;
+  text-align: center;
+}
+.box-sub {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+}
+.box-flavour-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 4px 12px;
+  border-radius: 100px;
+  color: #080808;
+  margin-top: 4px;
+}
+.box-count {
+  font-size: 10px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.box-emoji {
+  font-size: 36px;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.4));
+}
+.box-badge-row {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.box-badge {
+  font-size: 7px;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.6);
+}
+
+/* Box shadow */
+.box-shadow {
+  width: 200px;
+  height: 20px;
+  background: radial-gradient(ellipse, rgba(0,0,0,0.5) 0%, transparent 70%);
+  margin-top: -8px;
+  filter: blur(8px);
+  animation: shadowPulse 4s ease-in-out infinite;
+}
+@keyframes shadowPulse {
+  0%,100%{ transform: scaleX(1); opacity: 0.5; }
+  50%{ transform: scaleX(0.85); opacity: 0.3; }
+}
+
+/* ══════════════════════════════════════
+   SACHET — proper 3D foil sachet
+══════════════════════════════════════ */
+.sachet-section {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.sachet-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.sachet-label-small {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+
+/* Sachet body */
+.sachet {
+  width: 110px;
+  height: 180px;
+  position: relative;
+  border-radius: 10px 10px 18px 18px;
+  overflow: hidden;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(255,255,255,0.15);
+  transform: rotate(-3deg);
+  animation: sachetFloat 3.8s ease-in-out infinite;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(.23,1,.32,1);
+}
+.sachet:nth-child(2) { animation-delay: -1.2s; transform: rotate(1deg) scale(1.06); z-index:2; }
+.sachet:nth-child(3) { animation-delay: -2.4s; transform: rotate(3deg); }
+
+.sachet:hover { transform: rotate(0deg) scale(1.1) translateY(-8px) !important; z-index: 10; }
+
+@keyframes sachetFloat {
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-8px); }
+}
+
+/* Foil shine */
+.sachet::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    130deg,
+    transparent 25%,
+    rgba(255,255,255,0.07) 40%,
+    rgba(255,255,255,0.15) 48%,
+    rgba(255,255,255,0.05) 56%,
+    transparent 72%
+  );
+  pointer-events:none;
+}
+
+/* Top seal */
+.s-seal-top {
+  position:absolute;
+  top:0;left:0;right:0;
+  height:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  z-index:2;
+}
+.s-seal-top::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.3);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.seal-pip { width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,0.2);position:relative;z-index:1; }
+
+/* Bottom seal */
+.s-seal-bot {
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:18px;
+  background:rgba(0,0,0,0.3);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Tear notch */
+.s-notch {
+  position:absolute;
+  top:17px;right:10px;
+  width:0;height:0;
+  border-top:6px solid rgba(255,255,255,0.2);
+  border-left:6px solid transparent;
+  z-index:3;
+}
+
+/* Sachet content */
+.s-body {
+  position:absolute;
+  top:18px;bottom:18px;left:0;right:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 8px;
+}
+
+.s-top-badge {
+  font-size:6px;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  padding:2px 8px;
+  border-radius:100px;
+  background:rgba(255,255,255,0.1);
+  border:0.5px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.6);
+}
+
+.s-logo {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:28px;
+  line-height:1;
+  letter-spacing:0.05em;
+  color:#fff;
+  text-align:center;
+  text-shadow:0 2px 12px rgba(0,0,0,0.4);
+}
+.s-logo sub {
+  display:block;
+  font-size:9px;
+  letter-spacing:0.3em;
+  opacity:0.6;
+  font-family:'DM Sans',sans-serif;
+  font-weight:500;
+}
+
+.s-emoji { font-size:22px; }
+
+.s-flavour {
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  font-size:8px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.85);
+  text-align:center;
+  line-height:1.4;
+}
+
+.s-divider {
+  width:50%;
+  height:0.5px;
+  background:rgba(255,255,255,0.15);
+}
+
+.s-weight {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px;
+  letter-spacing:0.2em;
+  opacity:0.45;
+}
+
+/* Vertical brand text on sachet edge */
+.s-side-text {
+  position:absolute;
+  left:4px;
+  top:50%;
+  transform:translateY(-50%) rotate(-90deg);
+  font-size:5px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.15);
+  white-space:nowrap;
+}
+
+/* ── INFO CARD ── */
+.info-card {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.info-card::before {
+  content:'';
+  position:absolute;
+  top:0;left:15%;right:15%;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);
+}
+
+.info-flavour-name {
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:22px;
+  color:var(--white);
+  margin-bottom:4px;
+}
+.info-desc {
+  font-size:12px;
+  color:rgba(255,255,255,0.35);
+  line-height:1.6;
+  margin-bottom:18px;
+}
+
+.info-stats {
+  display:flex;
+  gap:0;
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;
+  overflow:hidden;
+  margin-bottom:18px;
+}
+.info-stat {
+  flex:1;
+  padding:12px 6px;
+  text-align:center;
+  border-right:1px solid rgba(255,255,255,0.06);
+}
+.info-stat:last-child{border-right:none;}
+.info-stat-n {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20px;
+  line-height:1;
+}
+.info-stat-l {
+  font-size:7.5px;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  color:rgba(255,255,255,0.3);
+  margin-top:2px;
+}
+
+.tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:18px;
+}
+.tag {
+  font-size:9.5px;
+  padding:5px 11px;
+  border-radius:100px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.55);
+}
+
+.cta-row {
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.btn-main {
+  flex:1;
+  padding:13px;
+  border:none;
+  border-radius:100px;
+  font-family:'DM Sans',sans-serif;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  cursor:pointer;
+  color:#080808;
+  transition:opacity 0.2s, transform 0.2s;
+}
+.btn-main:hover{opacity:0.85;transform:translateY(-1px);}
+.btn-sec {
+  width:44px;height:44px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;cursor:pointer;flex-shrink:0;
+  transition: background 0.2s;
+}
+.btn-sec:hover{background:rgba(255,255,255,0.1);}
+
+/* ── FOOTER ── */
+footer {
+  text-align:center;
+  padding:20px 24px 40px;
+  font-size:9px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.15);
+}
+
+/* ══════════════════
+   FLAVOUR THEMES
+══════════════════ */
+
+/* LEMON */
+.lemon-tab { --fc: #f5e642; }
+.lemon-tab.active, .lemon-tab:hover { background: #f5e642; border-color: #f5e642; }
+
+.lemon .box-front { background: linear-gradient(160deg, #3a3600 0%, #1e1c00 50%, #161400 100%); border: 1.5px solid rgba(245,230,66,0.3); }
+.lemon .box-right { background: linear-gradient(180deg, #2a2700, #131200); border-left: 1px solid rgba(245,230,66,0.15); }
+.lemon .box-top  { background: linear-gradient(160deg, #4a4500, #2a2700); border-bottom: 1px solid rgba(245,230,66,0.15); }
+.lemon .box-flavour-name { background: #f5e642; }
+.lemon .sachet { background: linear-gradient(160deg,#2e2b00,#191700,#0f0e00); border:1px solid rgba(245,230,66,0.25); }
+.lemon .s-seal-top::before { background: rgba(245,230,66,0.08); }
+.lemon .info-stat-n { color: #f5e642; }
+.lemon .tag.highlight { background: rgba(245,230,66,0.1); border-color: rgba(245,230,66,0.3); color:#f5e642; }
+.lemon .btn-main { background: #f5e642; }
+
+/* BERRIES */
+.berries-tab { --fc: #e84dc4; }
+.berries-tab.active, .berries-tab:hover { background: #e84dc4; border-color: #e84dc4; }
+
+.berries .box-front { background: linear-gradient(160deg,#2d0022,#1a0015,#100010); border:1.5px solid rgba(232,77,196,0.3); }
+.berries .box-right { background: linear-gradient(180deg,#200018,#0e000a); border-left:1px solid rgba(232,77,196,0.15); }
+.berries .box-top  { background: linear-gradient(160deg,#3a002a,#220018); border-bottom:1px solid rgba(232,77,196,0.15); }
+.berries .box-flavour-name { background: #e84dc4; }
+.berries .sachet { background: linear-gradient(160deg,#280020,#14000f,#0c0008); border:1px solid rgba(232,77,196,0.25); }
+.berries .s-seal-top::before { background: rgba(232,77,196,0.08); }
+.berries .info-stat-n { color:#e84dc4; }
+.berries .tag.highlight { background:rgba(232,77,196,0.1); border-color:rgba(232,77,196,0.3); color:#e84dc4; }
+.berries .btn-main { background: #e84dc4; }
+
+/* WATERMELON */
+.watermelon-tab { --fc: #ff4d6e; }
+.watermelon-tab.active, .watermelon-tab:hover { background:#ff4d6e; border-color:#ff4d6e; }
+
+.watermelon .box-front { background: linear-gradient(160deg,#2e0010,#1a0009,#100006); border:1.5px solid rgba(255,77,110,0.3); }
+.watermelon .box-right { background: linear-gradient(180deg,#200009,#0e0004); border-left:1px solid rgba(255,77,110,0.15); }
+.watermelon .box-top  { background: linear-gradient(160deg,#3a0012,#22000a); border-bottom:1px solid rgba(255,77,110,0.15); }
+.watermelon .box-flavour-name { background:#ff4d6e; }
+.watermelon .sachet { background: linear-gradient(160deg,#280010,#14000a,#0c0005); border:1px solid rgba(255,77,110,0.25); }
+.watermelon .s-seal-top::before { background:rgba(255,77,110,0.08); }
+.watermelon .info-stat-n { color:#ff4d6e; }
+.watermelon .tag.highlight { background:rgba(255,77,110,0.1); border-color:rgba(255,77,110,0.3); color:#ff4d6e; }
+.watermelon .btn-main { background:#ff4d6e; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">Premium Fiber Drink · 3 Flavours</div>
+  <h1>GUT<span>FLO</span></h1>
+  <p class="sub">Daily Digestive Wellness · No Sugar · Made in India</p>
+</header>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab lemon-tab active" onclick="switchFlavour('lemon')">🍋 Lemon</div>
+  <div class="tab berries-tab" onclick="switchFlavour('berries')">🫐 Mixed Berries</div>
+  <div class="tab watermelon-tab" onclick="switchFlavour('watermelon')">🍉 Watermelon</div>
+</div>
+
+<div class="scene-outer">
+
+  <!-- ══ LEMON ══ -->
+  <div class="flavour-scene lemon active" id="scene-lemon">
+
+    <!-- 3D BOX -->
+    <div>
+      <div class="box-wrap">
+        <div class="box-3d">
+          <!-- Top -->
+          <div class="box-face box-top lemon">
+            <div class="box-top-text">GutFlo · Lemon · 15 Sachets</div>
+          </div>
+          <!-- Front -->
+          <div class="box-face box-front lemon">
+            <div class="box-sub">Premium Fiber Drink</div>
+            <div class="box-emoji">🍋</div>
+            <div>
+              <div class="box-brand">GUT<br>FLO</div>
+            </div>
+            <div class="box-flavour-name">Zesty Lemon</div>
+            <div class="box-badge-row">
+              <div class="box-badge">5g Fiber</div>
+              <div class="box-badge">No Sugar</div>
+              <div class="box-badge">Prebiotic</div>
+            </div>
+            <div class="box-count">15 Sachets · 5g Each</div>
+          </div>
+          <!-- Right -->
+          <div class="box-face box-right lemon">
+            <div class="box-right-text">GUTFLO · DAILY FIBER · FSSAI</div>
+          </div>
+        </div>
+      </div>
+      <div class="box-shadow"></div>
+    </div>
+
+    <!-- SACHETS -->
+    <div class="sachet-section">
+      <div class="sachet-unit">
+        <div class="sachet lemon" style="transform:rotate(-6deg);width:95px;height:160px;">
+          <div class="s-seal-top"><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div></div>
+          <div class="s-notch"></div>
+          <span class="s-side-text">GutFlo · Zesty Lemon · 5g</span>
+          <div class="s-body">
+            <div class="s-top-badge">Fiber Drink</div>
+            <div class="s-logo">GUT<sub>FLO</sub></div>
+            <div class="s-emoji">🍋</div>
+            <div class="s-divider"></div>
+            <div class="s-flavour">Zesty<br>Lemon</div>
+            <div class="s-weight">5G</div>
+          </div>
+          <div class="s-seal-bot"></div>
+        </div>
+        <div class="sachet-label-small">Back view</div>
+      </div>
+
+      <div class="sachet-unit">
+        <div class="sachet lemon" style="transform:rotate(0deg) scale(1.12);width:110px;height:185px;z-index:3;">
+          <div class="s-seal-top"><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div></div>
+          <div class="s-notch"></div>
+          <span class="s-side-text">GutFlo · Zesty Lemon · 5g</span>
+          <div class="s-body">
+            <div class="s-top-badge">Fiber Drink</div>
+            <div class="s-logo">GUT<sub>FLO</sub></div>
+            <div class="s-emoji">🍋</div>
+            <div class="s-divider"></div>
+            <div class="s-flavour">Zesty<br>Lemon</div>
+            <div class="s-weight">5G</div>
+          </div>
+          <div class="s-seal-bot"></div>
+        </div>
+        <div class="sachet-label-small">Front · 1 sachet</div>
+      </div>
+
+      <div class="sachet-unit">
+        <div class="sachet lemon" style="transform:rotate(6deg);width:95px;height:160px;">
+          <div class="s-seal-top"><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div></div>
+          <span class="s-side-text">GutFlo · Zesty Lemon · 5g</span>
+          <div class="s-body">
+            <div class="s-top-badge">Fiber Drink</div>
+            <div class="s-logo">GUT<sub>FLO</sub></div>
+            <div class="s-emoji">🍋</div>
+            <div class="s-divider"></div>
+            <div class="s-flavour">Zesty<br>Lemon</div>
+            <div class="s-weight">5G</div>
+          </div>
+          <div class="s-seal-bot"></div>
+        </div>
+        <div class="sachet-label-small">Side view</div>
+      </div>
+    </div>
+
+    <!-- INFO CARD -->
+    <div class="info-card lemon">
+      <div class="info-flavour-name">Zesty Lemon 🍋</div>
+      <div class="info-desc">Tangy citrus burst with a clean fizz finish. Gut-loving fiber that actually tastes like something you'd want.</div>
+      <div class="info-stats">
+        <div class="info-stat"><div class="info-stat-n lemon">5g</div><div class="info-stat-l">Fiber</div></div>
+        <div class="info-stat"><div class="info-stat-n lemon">13</div><div class="info-stat-l">Ingredients</div></div>
+        <div class="info-stat"><div class="info-stat-n lemon">0</div><div class="info-stat-l">Sugar</div></div>
+        <div class="info-stat"><div class="info-stat-n lemon">15</div><div class="info-stat-l">Sachets</div></div>
+      </div>
+      <div class="tags">
+        <div class="tag highlight">Psyllium Husk</div>
+        <div class="tag highlight">Vitamin C</div>
+        <div class="tag">Inulin</div>
+        <div class="tag">Probiotics</div>
+        <div class="tag">+9 more</div>
+      </div>
+      <div class="cta-row">
+        <button class="btn-main lemon">Try 6-Day Trial →</button>
+        <div class="btn-sec">♡</div>
+      </div>
+    </div>
+
+  </div><!-- /lemon -->
+
+  <!-- ══ BERRIES ══ -->
+  <div class="flavour-scene berries" id="scene-berries">
+
+    <div>
+      <div class="box-wrap">
+        <div class="box-3d">
+          <div class="box-face box-top berries"><div class="box-top-text">GutFlo · Mixed Berries · 15 Sachets</div></div>
+          <div class="box-face box-front berries">
+            <div class="box-sub">Premium Fiber Drink</div>
+            <div class="box-emoji">🫐</div>
+            <div><div class="box-brand">GUT<br>FLO</div></div>
+            <div class="box-flavour-name">Mixed Berries</div>
+            <div class="box-badge-row">
+              <div class="box-badge">5g Fiber</div>
+              <div class="box-badge">No Sugar</div>
+              <div class="box-badge">Antioxidant</div>
+            </div>
+            <div class="box-count">15 Sachets · 5g Each</div>
+          </div>
+          <div class="box-face box-right berries"><div class="box-right-text">GUTFLO · DAILY FIBER · FSSAI</div></div>
+        </div>
+      </div>
+      <div class="box-shadow"></div>
+    </div>
+
+    <div class="sachet-section">
+      <div class="sachet-unit">
+        <div class="sachet berries" style="transform:rotate(-6deg);width:95px;height:160px;">
+          <div class="s-seal-top"><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div></div>
+          <div class="s-notch"></div>
+          <span class="s-side-text">GutFlo · Mixed Berries · 5g</span>
+          <div class="s-body">
+            <div class="s-top-badge">Fiber Drink</div>
+            <div class="s-logo">GUT<sub>FLO</sub></div>
+            <div class="s-emoji">🫐</div>
+            <div class="s-divider"></div>
+            <div class="s-flavour">Mixed<br>Berries</div>
+            <div class="s-weight">5G</div>
+          </div>
+          <div class="s-seal-bot"></div>
+        </div>
+        <div class="sachet-label-small">Back view</div>
+      </div>
+      <div class="sachet-unit">
+        <div class="sachet berries" style="transform:rotate(0deg) scale(1.12);width:110px;height:185px;z-index:3;">
+          <div class="s-seal-top"><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div></div>
+          <div class="s-notch"></div>
+          <span class="s-side-text">GutFlo · Mixed Berries · 5g</span>
+          <div class="s-body">
+            <div class="s-top-badge">Fiber Drink</div>
+            <div class="s-logo">GUT<sub>FLO</sub></div>
+            <div class="s-emoji">🫐</div>
+            <div class="s-divider"></div>
+            <div class="s-flavour">Mixed<br>Berries</div>
+            <div class="s-weight">5G</div>
+          </div>
+          <div class="s-seal-bot"></div>
+        </div>
+        <div class="sachet-label-small">Front · 1 sachet</div>
+      </div>
+      <div class="sachet-unit">
+        <div class="sachet berries" style="transform:rotate(6deg);width:95px;height:160px;">
+          <div class="s-seal-top"><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div></div>
+          <span class="s-side-text">GutFlo · Mixed Berries · 5g</span>
+          <div class="s-body">
+            <div class="s-top-badge">Fiber Drink</div>
+            <div class="s-logo">GUT<sub>FLO</sub></div>
+            <div class="s-emoji">🫐</div>
+            <div class="s-divider"></div>
+            <div class="s-flavour">Mixed<br>Berries</div>
+            <div class="s-weight">5G</div>
+          </div>
+          <div class="s-seal-bot"></div>
+        </div>
+        <div class="sachet-label-small">Side view</div>
+      </div>
+    </div>
+
+    <div class="info-card berries">
+      <div class="info-flavour-name">Mixed Berries 🫐</div>
+      <div class="info-desc">Blueberry, raspberry, strawberry — deep antioxidant richness. Tastes indulgent, works hard.</div>
+      <div class="info-stats">
+        <div class="info-stat"><div class="info-stat-n">5g</div><div class="info-stat-l">Fiber</div></div>
+        <div class="info-stat"><div class="info-stat-n">13</div><div class="info-stat-l">Ingredients</div></div>
+        <div class="info-stat"><div class="info-stat-n">0</div><div class="info-stat-l">Sugar</div></div>
+        <div class="info-stat"><div class="info-stat-n">15</div><div class="info-stat-l">Sachets</div></div>
+      </div>
+      <div class="tags">
+        <div class="tag highlight">Psyllium Husk</div>
+        <div class="tag highlight">Antioxidants</div>
+        <div class="tag">Inulin</div>
+        <div class="tag">Probiotics</div>
+        <div class="tag">+9 more</div>
+      </div>
+      <div class="cta-row">
+        <button class="btn-main berries">Try 6-Day Trial →</button>
+        <div class="btn-sec">♡</div>
+      </div>
+    </div>
+
+  </div><!-- /berries -->
+
+  <!-- ══ WATERMELON ══ -->
+  <div class="flavour-scene watermelon" id="scene-watermelon">
+
+    <div>
+      <div class="box-wrap">
+        <div class="box-3d">
+          <div class="box-face box-top watermelon"><div class="box-top-text">GutFlo · Watermelon · 15 Sachets</div></div>
+          <div class="box-face box-front watermelon">
+            <div class="box-sub">Premium Fiber Drink</div>
+            <div class="box-emoji">🍉</div>
+            <div><div class="box-brand">GUT<br>FLO</div></div>
+            <div class="box-flavour-name">Watermelon Splash</div>
+            <div class="box-badge-row">
+              <div class="box-badge">5g Fiber</div>
+              <div class="box-badge">No Sugar</div>
+              <div class="box-badge">Hydrating</div>
+            </div>
+            <div class="box-count">15 Sachets · 5g Each</div>
+          </div>
+          <div class="box-face box-right watermelon"><div class="box-right-text">GUTFLO · DAILY FIBER · FSSAI</div></div>
+        </div>
+      </div>
+      <div class="box-shadow"></div>
+    </div>
+
+    <div class="sachet-section">
+      <div class="sachet-unit">
+        <div class="sachet watermelon" style="transform:rotate(-6deg);width:95px;height:160px;">
+          <div class="s-seal-top"><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div></div>
+          <div class="s-notch"></div>
+          <span class="s-side-text">GutFlo · Watermelon Splash · 5g</span>
+          <div class="s-body">
+            <div class="s-top-badge">Fiber Drink</div>
+            <div class="s-logo">GUT<sub>FLO</sub></div>
+            <div class="s-emoji">🍉</div>
+            <div class="s-divider"></div>
+            <div class="s-flavour">Watermelon<br>Splash</div>
+            <div class="s-weight">5G</div>
+          </div>
+          <div class="s-seal-bot"></div>
+        </div>
+        <div class="sachet-label-small">Back view</div>
+      </div>
+      <div class="sachet-unit">
+        <div class="sachet watermelon" style="transform:rotate(0deg) scale(1.12);width:110px;height:185px;z-index:3;">
+          <div class="s-seal-top"><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div></div>
+          <div class="s-notch"></div>
+          <span class="s-side-text">GutFlo · Watermelon Splash · 5g</span>
+          <div class="s-body">
+            <div class="s-top-badge">Fiber Drink</div>
+            <div class="s-logo">GUT<sub>FLO</sub></div>
+            <div class="s-emoji">🍉</div>
+            <div class="s-divider"></div>
+            <div class="s-flavour">Watermelon<br>Splash</div>
+            <div class="s-weight">5G</div>
+          </div>
+          <div class="s-seal-bot"></div>
+        </div>
+        <div class="sachet-label-small">Front · 1 sachet</div>
+      </div>
+      <div class="sachet-unit">
+        <div class="sachet watermelon" style="transform:rotate(6deg);width:95px;height:160px;">
+          <div class="s-seal-top"><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div><div class="seal-pip"></div></div>
+          <span class="s-side-text">GutFlo · Watermelon Splash · 5g</span>
+          <div class="s-body">
+            <div class="s-top-badge">Fiber Drink</div>
+            <div class="s-logo">GUT<sub>FLO</sub></div>
+            <div class="s-emoji">🍉</div>
+            <div class="s-divider"></div>
+            <div class="s-flavour">Watermelon<br>Splash</div>
+            <div class="s-weight">5G</div>
+          </div>
+          <div class="s-seal-bot"></div>
+        </div>
+        <div class="sachet-label-small">Side view</div>
+      </div>
+    </div>
+
+    <div class="info-card watermelon">
+      <div class="info-flavour-name">Watermelon Splash 🍉</div>
+      <div class="info-desc">Summer-fresh watermelon with a cooling finish. Light, hydrating, and easy on the gut.</div>
+      <div class="info-stats">
+        <div class="info-stat"><div class="info-stat-n">5g</div><div class="info-stat-l">Fiber</div></div>
+        <div class="info-stat"><div class="info-stat-n">13</div><div class="info-stat-l">Ingredients</div></div>
+        <div class="info-stat"><div class="info-stat-n">0</div><div class="info-stat-l">Sugar</div></div>
+        <div class="info-stat"><div class="info-stat-n">15</div><div class="info-stat-l">Sachets</div></div>
+      </div>
+      <div class="tags">
+        <div class="tag highlight">Psyllium Husk</div>
+        <div class="tag highlight">Electrolytes</div>
+        <div class="tag">Inulin</div>
+        <div class="tag">Probiotics</div>
+        <div class="tag">+9 more</div>
+      </div>
+      <div class="cta-row">
+        <button class="btn-main watermelon">Try 6-Day Trial →</button>
+        <div class="btn-sec">♡</div>
+      </div>
+    </div>
+
+  </div><!-- /watermelon -->
+
+</div><!-- /scene-outer -->
+
+<footer>GutFlo · Premium Fiber Drink · Made in India · FSSAI Compliant · No Artificial Flavours</footer>
+
+<script>
+function switchFlavour(f) {
+  document.querySelectorAll('.flavour-scene').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('scene-' + f).classList.add('active');
+  document.querySelector('.' + f + '-tab').classList.add('active');
+}
+</script>
+</body>
+</html>

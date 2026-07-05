@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANAYA — Ethnic Wears</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --forest:  #0F2B26;
+  --forest2: #1a3d35;
+  --gold:    #D4AF37;
+  --gold-lt: #e8c96a;
+  --beige:   #C8BB9A;
+  --beige-lt:#F6F3EE;
+  --brown:   #6B4E3D;
+  --cream:   #FAF7F2;
+  --ink:     #1a1208;
+  --muted:   #8a7a60;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CURSOR */
+#cur { position:fixed; width:8px; height:8px; background:var(--gold); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:width .3s,height .3s; }
+#cur-r { position:fixed; width:32px; height:32px; border:1px solid var(--gold); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); opacity:.55; transition:width .3s,height .3s,opacity .3s; }
+
+/* ===================== NAV ===================== */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:200;
+  padding: 20px 56px;
+  display: flex; align-items:center; justify-content:space-between;
+  background: rgba(15,43,38,0.94);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(212,175,55,0.18);
+}
+.nav-logo-wrap { display:flex; flex-direction:column; align-items:center; gap:2px; }
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 24px; font-weight:700;
+  letter-spacing: 10px; color:#fff;
+}
+.nav-logo span { color: var(--gold); }
+.nav-sub {
+  font-size: 8px; letter-spacing:5px; text-transform:uppercase;
+  color: var(--beige); font-weight:300;
+}
+.nav-line { width:60px; height:1px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin:0 auto; }
+.nav-links { display:flex; gap:36px; list-style:none; }
+.nav-links a {
+  font-size:10px; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(255,255,255,0.5); text-decoration:none;
+  transition:color .3s; font-weight:300;
+}
+.nav-links a:hover { color:var(--gold); }
+.nav-cta {
+  font-size:9px; letter-spacing:3px; text-transform:uppercase;
+  padding:10px 22px; border:1px solid var(--gold);
+  background:transparent; color:var(--gold);
+  font-family:'Raleway',sans-serif; cursor:none;
+  transition:all .3s;
+}
+.nav-cta:hover { background:var(--gold); color:var(--forest); }
+
+/* ===================== HERO ===================== */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  padding-top: 80px;
+  overflow: hidden;
+}
+.hero-left {
+  background: var(--forest);
+  display:flex; flex-direction:column; justify-content:center;
+  padding: 80px 64px;
+  position:relative; overflow:hidden;
+}
+/* Arch motif background */
+.hero-left::before {
+  content:'';
+  position:absolute; top:10%; left:50%; transform:translateX(-50%);
+  width:340px; height:440px;
+  border:1px solid rgba(212,175,55,0.08);
+  border-radius:170px 170px 0 0;
+}
+.hero-left::after {
+  content:'';
+  position:absolute; top:14%; left:50%; transform:translateX(-50%);
+  width:260px; height:340px;
+  border:1px solid rgba(212,175,55,0.05);
+  border-radius:130px 130px 0 0;
+}
+.logo-mark {
+  margin-bottom:36px; position:relative; z-index:2;
+  animation: fadeUp .9s ease .1s both;
+}
+.logo-mark svg { width:64px; height:64px; }
+.hero-tag {
+  font-size:9px; letter-spacing:6px; text-transform:uppercase;
+  color:var(--gold); margin-bottom:20px;
+  position:relative; z-index:2;
+  animation: fadeUp .9s ease .2s both;
+}
+.hero h1 {
+  font-family:'Cinzel',serif;
+  font-size: clamp(52px,6vw,80px);
+  font-weight:700; line-height:.95;
+  color:#fff; position:relative; z-index:2;
+  animation: fadeUp .9s ease .35s both;
+}
+.hero h1 .gold-word { color:var(--gold); display:block; font-weight:400; font-size:.8em; letter-spacing:6px; margin-top:8px; }
+.hero-tagline {
+  margin-top:12px; font-size:11px; letter-spacing:4px;
+  text-transform:uppercase; color:var(--beige);
+  font-weight:300; position:relative; z-index:2;
+  animation: fadeUp .9s ease .45s both;
+}
+.hero-divider {
+  width:48px; height:1px;
+  background:linear-gradient(to right, var(--gold), transparent);
+  margin:28px 0; position:relative; z-index:2;
+  animation: fadeUp .9s ease .5s both;
+}
+.hero-desc {
+  font-size:13px; line-height:2.1; color:rgba(200,187,154,0.65);
+  font-weight:200; max-width:340px; letter-spacing:.4px;
+  position:relative; z-index:2;
+  animation: fadeUp .9s ease .6s both;
+}
+.hero-btns {
+  margin-top:44px; display:flex; gap:16px; align-items:center;
+  position:relative; z-index:2;
+  animation: fadeUp .9s ease .75s both;
+}
+.btn-primary {
+  padding:14px 36px; background:var(--gold); color:var(--forest);
+  font-size:9px; letter-spacing:3px; text-transform:uppercase;
+  border:none; font-family:'Raleway',sans-serif; font-weight:600;
+  cursor:none; transition:background .3s;
+}
+.btn-primary:hover { background:var(--gold-lt); }
+.btn-ghost {
+  font-size:9px; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(200,187,154,.55); background:none; border:none;
+  font-family:'Raleway',sans-serif; cursor:none;
+  display:flex; align-items:center; gap:10px; transition:color .3s;
+}
+.btn-ghost::after { content:'→'; font-size:14px; transition:transform .3s; }
+.btn-ghost:hover { color:var(--beige); }
+.btn-ghost:hover::after { transform:translateX(5px); }
+
+/* Hero right — dress photos */
+.hero-right {
+  background:var(--beige-lt);
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  gap:0; overflow:hidden; position:relative;
+}
+.hero-photo-col {
+  position:relative; overflow:hidden;
+  display:flex; align-items:flex-end;
+}
+.hero-photo-col img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:top center;
+  transition:transform .7s ease;
+  filter:brightness(.85) saturate(1.05);
+}
+.hero-photo-col:hover img { transform:scale(1.05); }
+.hero-photo-label {
+  position:relative; z-index:2;
+  padding:60px 14px 18px; width:100%;
+  background:linear-gradient(transparent,rgba(15,43,38,.75));
+  text-align:center;
+}
+.hero-photo-label .label-tag {
+  display:block; font-size:8px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--gold); margin-bottom:4px;
+}
+.hero-photo-label .label-name {
+  display:block; font-family:'Cinzel',serif;
+  font-size:11px; color:#fff; letter-spacing:1px;
+}
+.hero-photo-col:nth-child(2) { margin-top:40px; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(28px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ===================== ORNAMENT ===================== */
+.ornament {
+  display:flex; align-items:center; gap:20px;
+  padding:40px 56px; background:var(--cream);
+}
+.orn-line { flex:1; height:1px; background:linear-gradient(to right,transparent,var(--beige),transparent); }
+.orn-center {
+  display:flex; align-items:center; gap:12px;
+  color:var(--gold); font-size:10px; letter-spacing:4px;
+  text-transform:uppercase; font-weight:300;
+}
+.orn-diamond { width:6px; height:6px; background:var(--gold); transform:rotate(45deg); }
+
+/* ===================== COLLECTION ===================== */
+.collection {
+  padding:80px 56px;
+  background:var(--cream);
+}
+.section-header { text-align:center; margin-bottom:60px; }
+.section-eyebrow {
+  font-size:9px; letter-spacing:6px; text-transform:uppercase;
+  color:var(--gold); margin-bottom:14px; font-weight:400;
+}
+.section-title {
+  font-family:'Cinzel',serif;
+  font-size:clamp(32px,4vw,52px); font-weight:600;
+  color:var(--forest); line-height:1.1;
+}
+.section-title em { font-style:italic; color:var(--brown); font-weight:400; }
+.section-sub {
+  font-size:12px; color:var(--muted); margin-top:12px;
+  letter-spacing:1px; font-style:italic; font-weight:300;
+}
+
+.collection-grid {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:3px;
+}
+.c-item {
+  position:relative; overflow:hidden; cursor:none;
+  aspect-ratio:2/3;
+}
+.c-item img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:top center;
+  transition:transform .7s ease;
+  filter:brightness(.78) saturate(1.1);
+}
+.c-item:hover img { transform:scale(1.07); }
+.c-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(15,43,38,.8) 0%, transparent 55%);
+  transition:opacity .4s;
+}
+.c-item:hover .c-overlay { opacity:.85; }
+.c-info {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:40px 20px 22px; z-index:2;
+}
+.c-info h4 {
+  font-family:'Cinzel',serif; font-size:16px; font-weight:600;
+  color:#fff; margin-bottom:5px; letter-spacing:.5px;
+}
+.c-info span {
+  font-size:8px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--gold); font-weight:400;
+}
+.c-price {
+  position:absolute; top:16px; right:16px; z-index:2;
+  background:rgba(212,175,55,.15); border:1px solid rgba(212,175,55,.35);
+  padding:6px 12px;
+  font-size:10px; letter-spacing:2px; color:var(--gold-lt);
+  font-weight:500; backdrop-filter:blur(4px);
+}
+/* stagger */
+.c-item:nth-child(2) { margin-top:32px; }
+.c-item:nth-child(4) { margin-top:-32px; }
+
+/* ===================== BRAND PROMISE ===================== */
+.promise {
+  background:var(--forest);
+  display:grid; grid-template-columns:1fr 1fr;
+  overflow:hidden;
+}
+.promise-left {
+  padding:80px 64px;
+  display:flex; flex-direction:column; justify-content:center;
+  position:relative; overflow:hidden;
+}
+.promise-left::before {
+  content:'';
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:500px; height:500px; border-radius:50%;
+  border:1px solid rgba(212,175,55,.05);
+}
+.promise-num {
+  font-family:'Cinzel',serif; font-size:120px; font-weight:700;
+  color:rgba(212,175,55,.07); line-height:1;
+  position:absolute; top:20px; left:40px; pointer-events:none;
+}
+.promise-eyebrow {
+  font-size:9px; letter-spacing:5px; text-transform:uppercase;
+  color:var(--gold); margin-bottom:20px; position:relative; z-index:2;
+}
+.promise-title {
+  font-family:'Cinzel',serif; font-size:clamp(28px,3vw,42px);
+  font-weight:600; color:#fff; line-height:1.2;
+  position:relative; z-index:2;
+}
+.promise-title em { color:var(--gold-lt); font-style:italic; font-weight:400; }
+.promise-body {
+  margin-top:24px; font-size:13px; line-height:2.1;
+  color:rgba(200,187,154,.55); font-weight:200; letter-spacing:.4px;
+  max-width:380px; position:relative; z-index:2;
+}
+.promise-stats {
+  margin-top:44px; display:flex; gap:44px;
+  padding-top:36px; border-top:1px solid rgba(212,175,55,.15);
+  position:relative; z-index:2;
+}
+.p-stat h3 {
+  font-family:'Cinzel',serif; font-size:36px; font-weight:700;
+  color:var(--gold); line-height:1;
+}
+.p-stat p { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(200,187,154,.5); margin-top:6px; line-height:1.6; }
+
+/* Promise right — features grid */
+.promise-right {
+  background:var(--forest2);
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:1px;
+}
+.feat-box {
+  padding:48px 36px;
+  display:flex; flex-direction:column; gap:16px;
+  background:rgba(15,43,38,.6);
+  border-bottom:1px solid rgba(212,175,55,.07);
+  transition:background .3s;
+}
+.feat-box:hover { background:rgba(15,43,38,.3); }
+.feat-icon { font-size:28px; }
+.feat-box h4 {
+  font-family:'Cinzel',serif; font-size:14px; font-weight:600;
+  color:#fff; letter-spacing:1px;
+}
+.feat-box p { font-size:12px; color:rgba(200,187,154,.45); line-height:1.9; font-weight:200; }
+
+/* ===================== PACKAGING ===================== */
+.packaging {
+  padding:100px 56px;
+  background:var(--beige-lt);
+  text-align:center;
+}
+.packaging .section-header { margin-bottom:64px; }
+
+.pack-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:32px; max-width:1000px; margin:0 auto;
+}
+.pack-card {
+  position:relative; overflow:hidden;
+  border-radius:4px;
+  background:var(--forest);
+  padding:48px 36px 36px;
+  display:flex; flex-direction:column; align-items:center; gap:20px;
+  box-shadow:0 20px 60px rgba(15,43,38,.18);
+  transition:transform .4s ease, box-shadow .4s ease;
+}
+.pack-card:hover { transform:translateY(-8px); box-shadow:0 32px 80px rgba(15,43,38,.28); }
+
+/* SVG box illustration */
+.pack-visual {
+  width:140px; height:140px;
+  display:flex; align-items:center; justify-content:center;
+}
+.pack-card-title {
+  font-family:'Cinzel',serif; font-size:13px; font-weight:600;
+  color:#fff; letter-spacing:2px; text-align:center;
+}
+.pack-card-sub { font-size:10px; letter-spacing:2px; color:var(--beige); font-weight:200; text-align:center; }
+.pack-gold-line { width:32px; height:1px; background:var(--gold); margin:4px auto; }
+
+/* Tag card */
+.pack-tag-card {
+  background:var(--beige-lt);
+  border:1px solid rgba(212,175,55,.25);
+  box-shadow:0 8px 30px rgba(15,43,38,.1);
+}
+
+/* ===================== ABOUT ===================== */
+.about {
+  background:var(--forest);
+  padding:100px 56px;
+  display:grid; grid-template-columns:1.2fr 1fr;
+  gap:80px; align-items:center;
+}
+.about-content .eyebrow {
+  font-size:9px; letter-spacing:6px; text-transform:uppercase;
+  color:var(--gold); margin-bottom:18px; font-weight:400;
+}
+.about-content h2 {
+  font-family:'Cinzel',serif; font-size:clamp(30px,4vw,48px);
+  font-weight:600; color:#fff; line-height:1.2; margin-bottom:24px;
+}
+.about-content h2 span { color:var(--gold-lt); }
+.about-content p {
+  font-size:13px; line-height:2.2; color:rgba(200,187,154,.6);
+  font-weight:200; margin-bottom:18px;
+}
+.about-icons {
+  margin-top:36px; display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+  border-top:1px solid rgba(212,175,55,.12); padding-top:36px;
+}
+.about-icon-item { text-align:center; display:flex; flex-direction:column; gap:10px; align-items:center; }
+.about-icon-item .ico { font-size:24px; }
+.about-icon-item span {
+  font-size:8px; letter-spacing:2px; text-transform:uppercase;
+  color:rgba(200,187,154,.45); font-weight:300; line-height:1.6;
+}
+.about-right { position:relative; }
+.about-img-main {
+  width:100%; aspect-ratio:3/4; object-fit:cover; object-position:top;
+  filter:brightness(.8) saturate(1.1);
+  border:1px solid rgba(212,175,55,.15);
+}
+.about-img-accent {
+  position:absolute; bottom:-24px; right:-24px;
+  width:45%; aspect-ratio:1;
+  object-fit:cover; object-position:top;
+  filter:brightness(.75) saturate(1.1);
+  border:3px solid var(--forest);
+  outline:1px solid rgba(212,175,55,.2);
+}
+.about-badge {
+  position:absolute; top:24px; left:-20px;
+  width:90px; height:90px;
+  background:var(--gold); border-radius:50%;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:2px;
+  box-shadow:0 8px 24px rgba(212,175,55,.3);
+}
+.about-badge .yr { font-family:'Cinzel',serif; font-size:22px; font-weight:700; color:var(--forest); line-height:1; }
+.about-badge .yr-l { font-size:7px; letter-spacing:2px; color:rgba(15,43,38,.7); text-transform:uppercase; }
+
+/* ===================== COLOR PALETTE SECTION ===================== */
+.brand-board {
+  padding:80px 56px;
+  background:var(--cream);
+}
+.bb-grid {
+  display:grid; grid-template-columns:1fr 1fr 1fr 1fr;
+  gap:32px; max-width:1100px; margin:48px auto 0;
+}
+.bb-card {
+  border:1px solid rgba(200,187,154,.35);
+  border-radius:2px; overflow:hidden;
+}
+.bb-card-top {
+  height:140px; display:flex; align-items:center; justify-content:center;
+  font-family:'Cinzel',serif; font-size:20px; font-weight:700;
+  letter-spacing:6px; position:relative;
+}
+.bb-card-bottom { padding:16px 20px; }
+.bb-card-bottom h5 {
+  font-size:11px; letter-spacing:2px; text-transform:uppercase;
+  margin-bottom:6px; color:var(--ink);
+}
+.bb-card-bottom code {
+  font-size:10px; color:var(--muted); letter-spacing:1px;
+  font-family:monospace;
+}
+
+/* fabric swatches */
+.fabric-row {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:16px; max-width:700px; margin:48px auto 0;
+}
+.fabric-swatch {
+  height:80px; border-radius:2px;
+  display:flex; align-items:flex-end; padding:10px 14px;
+  font-size:9px; letter-spacing:2px; text-transform:uppercase;
+  font-weight:400; overflow:hidden; position:relative;
+}
+.fabric-swatch img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; filter:saturate(1.2) brightness(.75);
+}
+.fabric-swatch span { position:relative; z-index:2; color:rgba(255,255,255,.8); }
+
+/* ===================== STORE ===================== */
+.store-section {
+  position:relative; overflow:hidden;
+  height:480px;
+}
+.store-bg {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; filter:brightness(.45) saturate(1.1);
+}
+.store-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(135deg,rgba(15,43,38,.85) 0%,transparent 60%);
+}
+.store-content {
+  position:relative; z-index:2;
+  padding:80px 64px;
+  display:flex; flex-direction:column; justify-content:center;
+  height:100%;
+  max-width:560px;
+}
+.store-content .eyebrow {
+  font-size:9px; letter-spacing:5px; text-transform:uppercase;
+  color:var(--gold); margin-bottom:16px;
+}
+.store-content h2 {
+  font-family:'Cinzel',serif; font-size:clamp(28px,4vw,48px);
+  font-weight:600; color:#fff; line-height:1.15; margin-bottom:20px;
+}
+.store-content p { font-size:13px; color:rgba(255,255,255,.5); line-height:2; font-weight:200; }
+.store-btn {
+  margin-top:36px; display:inline-block;
+  padding:14px 40px; background:var(--gold); color:var(--forest);
+  font-size:9px; letter-spacing:3px; text-transform:uppercase;
+  font-family:'Raleway',sans-serif; font-weight:600;
+  border:none; cursor:none; transition:background .3s; width:fit-content;
+}
+.store-btn:hover { background:var(--gold-lt); }
+
+/* ===================== LOOKBOOK STRIP ===================== */
+.lookbook {
+  background:var(--forest);
+  padding:80px 56px;
+  text-align:center;
+}
+.lookbook .section-header { margin-bottom:48px; }
+.lookbook .section-title { color:#fff; }
+
+.look-strip {
+  display:flex; gap:3px; overflow:hidden;
+}
+.look-item {
+  flex:1; aspect-ratio:2/3; position:relative; overflow:hidden; cursor:none;
+}
+.look-item img {
+  width:100%; height:100%; object-fit:cover; object-position:top;
+  transition:transform .6s ease;
+  filter:brightness(.7) saturate(1.1);
+}
+.look-item:hover img { transform:scale(1.06); }
+.look-item-label {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:40px 16px 16px;
+  background:linear-gradient(transparent,rgba(15,43,38,.8));
+  text-align:left;
+}
+.look-item-label span {
+  font-family:'Cinzel',serif; font-size:13px; color:#fff;
+  font-weight:400; display:block; margin-bottom:3px;
+}
+.look-item-label small {
+  font-size:8px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--gold);
+}
+
+/* ===================== FOOTER ===================== */
+footer {
+  background:var(--forest);
+  border-top:1px solid rgba(212,175,55,.12);
+}
+.footer-top {
+  padding:64px 56px 48px;
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;
+}
+.footer-logo {
+  font-family:'Cinzel',serif; font-size:28px; font-weight:700;
+  letter-spacing:8px; color:#fff; margin-bottom:6px;
+}
+.footer-logo span { color:var(--gold); }
+.footer-logo-sub {
+  font-size:8px; letter-spacing:5px; text-transform:uppercase;
+  color:var(--beige); font-weight:300; margin-bottom:20px;
+}
+.footer-desc { font-size:12px; color:rgba(200,187,154,.4); line-height:1.9; font-weight:200; max-width:260px; font-style:italic; }
+.footer-col h4 { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
+.footer-col ul { list-style:none; }
+.footer-col ul li { margin-bottom:10px; }
+.footer-col ul li a {
+  font-size:12px; color:rgba(200,187,154,.35); text-decoration:none;
+  transition:color .3s; font-weight:200; letter-spacing:.5px;
+}
+.footer-col ul li a:hover { color:var(--gold); }
+.footer-bottom {
+  padding:20px 56px;
+  border-top:1px solid rgba(212,175,55,.08);
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:12px;
+}
+.footer-bottom p { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(200,187,154,.2); }
+.footer-bottom .social {
+  display:flex; gap:20px;
+}
+.footer-bottom .social a {
+  font-size:9px; letter-spacing:2px; text-transform:uppercase;
+  color:rgba(200,187,154,.3); text-decoration:none; transition:color .3s;
+}
+.footer-bottom .social a:hover { color:var(--gold); }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width:900px) {
+  .hero { grid-template-columns:1fr; }
+  .hero-right { min-height:60vw; }
+  .hero-left { padding:60px 32px; }
+  .promise { grid-template-columns:1fr; }
+  .about { grid-template-columns:1fr; }
+  .about-right { display:none; }
+  .collection-grid { grid-template-columns:1fr 1fr; }
+  .c-item:nth-child(2),.c-item:nth-child(4) { margin-top:0; }
+  .bb-grid { grid-template-columns:1fr 1fr; }
+  .pack-grid { grid-template-columns:1fr; max-width:360px; }
+  footer,.footer-top { grid-template-columns:1fr 1fr; }
+  nav { padding:16px 24px; }
+  .nav-links { display:none; }
+  .look-strip { flex-wrap:wrap; }
+  .look-item { min-width:45%; }
+  .promise-right { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo-wrap">
+    <div class="nav-logo">AN<span>A</span>YA</div>
+    <div class="nav-line"></div>
+    <div class="nav-sub">Ethnic Wears</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Collections</a></li>
+    <li><a href="#">Lookbook</a></li>
+    <li><a href="#">Heritage</a></li>
+    <li><a href="#">Bespoke</a></li>
+    <li><a href="#">Store</a></li>
+  </ul>
+  <button class="nav-cta">Shop Now</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <!-- Lotus logo mark SVG -->
+    <div class="logo-mark">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Arch -->
+        <path d="M8 56 Q8 20 32 12 Q56 20 56 56" stroke="#D4AF37" stroke-width="1" fill="none"/>
+        <!-- Lotus petals -->
+        <path d="M32 44 Q24 36 24 28 Q32 32 32 44Z" stroke="#D4AF37" stroke-width=".8" fill="rgba(212,175,55,.08)"/>
+        <path d="M32 44 Q40 36 40 28 Q32 32 32 44Z" stroke="#D4AF37" stroke-width=".8" fill="rgba(212,175,55,.08)"/>
+        <path d="M32 44 Q20 38 18 30 Q28 31 32 44Z" stroke="#D4AF37" stroke-width=".8" fill="rgba(212,175,55,.06)"/>
+        <path d="M32 44 Q44 38 46 30 Q36 31 32 44Z" stroke="#D4AF37" stroke-width=".8" fill="rgba(212,175,55,.06)"/>
+        <path d="M32 44 Q26 42 22 36 Q30 34 32 44Z" stroke="#D4AF37" stroke-width=".7" fill="rgba(212,175,55,.05)"/>
+        <path d="M32 44 Q38 42 42 36 Q34 34 32 44Z" stroke="#D4AF37" stroke-width=".7" fill="rgba(212,175,55,.05)"/>
+        <!-- Center dot -->
+        <circle cx="32" cy="44" r="2" fill="#D4AF37" opacity=".7"/>
+        <!-- Stem -->
+        <line x1="32" y1="46" x2="32" y2="54" stroke="#D4AF37" stroke-width=".8" opacity=".5"/>
+        <!-- Side leaves -->
+        <path d="M32 52 Q26 50 22 52" stroke="#D4AF37" stroke-width=".7" fill="none" opacity=".4"/>
+        <path d="M32 52 Q38 50 42 52" stroke="#D4AF37" stroke-width=".7" fill="none" opacity=".4"/>
+        <!-- Top small diamond -->
+        <rect x="31" y="10" width="2" height="2" fill="#D4AF37" transform="rotate(45 32 11)" opacity=".6"/>
+      </svg>
+    </div>
+
+    <div class="hero-tag">Rooted in Heritage · Made for Today</div>
+    <h1>ANAYA<div class="gold-word">ETHNIC WEARS</div></h1>
+    <p class="hero-tagline">Crafted with Passion · Worn with Pride</p>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">Anaya Ethnic Wears is a celebration of India's rich heritage and contemporary style. Our collections blend traditional craftsmanship with modern silhouettes — elegant, timeless, made for every celebration.</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Explore Collection</button>
+      <button class="btn-ghost">Our Story</button>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-photo-col">
+      <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500&q=85" alt="Timeless Elegance" onerror="this.style.background='#1a3d35'">
+      <div class="hero-photo-label">
+        <span class="label-tag">Timeless</span>
+        <span class="label-name">Elegance</span>
+      </div>
+    </div>
+    <div class="hero-photo-col">
+      <img src="https://images.unsplash.com/photo-1594938298603-c8148c4b4b37?w=500&q=85" alt="Tradition Redefined" onerror="this.style.background='#0F2B26'">
+      <div class="hero-photo-label">
+        <span class="label-tag">Tradition</span>
+        <span class="label-name">Redefined</span>
+      </div>
+    </div>
+    <div class="hero-photo-col">
+      <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=500&q=85" alt="Grace in Every Detail" onerror="this.style.background='#2a1a00'">
+      <div class="hero-photo-label">
+        <span class="label-tag">Grace in</span>
+        <span class="label-name">Every Detail</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORNAMENT -->
+<div class="ornament">
+  <div class="orn-line"></div>
+  <div class="orn-center">
+    <div class="orn-diamond"></div>
+    <span>Pratham Collection 2025</span>
+    <div class="orn-diamond"></div>
+  </div>
+  <div class="orn-line"></div>
+</div>
+
+<!-- COLLECTION -->
+<section class="collection">
+  <div class="section-header">
+    <div class="section-eyebrow">Spring · Summer 2025</div>
+    <h2 class="section-title">The <em>Anaya</em> Collection</h2>
+    <p class="section-sub">First bloom — heirloom craft for every celebration</p>
+  </div>
+  <div class="collection-grid">
+    <div class="c-item">
+      <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&q=85" alt="Bridal Lehenga" onerror="this.style.background='#6b1a1a'">
+      <div class="c-overlay"></div>
+      <div class="c-price">BRIDAL</div>
+      <div class="c-info"><h4>Gulabi Lehenga</h4><span>Silk · Handwoven</span></div>
+    </div>
+    <div class="c-item">
+      <img src="https://images.unsplash.com/photo-1594938298603-c8148c4b4b37?w=600&q=85" alt="Men Kurta" onerror="this.style.background='#1a3a1a'">
+      <div class="c-overlay"></div>
+      <div class="c-price">MEN'S</div>
+      <div class="c-info"><h4>Ivory Sherwani</h4><span>Chanderi · Zari</span></div>
+    </div>
+    <div class="c-item">
+      <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=600&q=85" alt="Banarasi Saree" onerror="this.style.background='#1a2a4a'">
+      <div class="c-overlay"></div>
+      <div class="c-price">WOMEN'S</div>
+      <div class="c-info"><h4>Indigo Banarasi</h4><span>Silk Saree · Brocade</span></div>
+    </div>
+    <div class="c-item">
+      <img src="https://images.unsplash.com/photo-1561365452-adb940139ffa?w=600&q=85" alt="Festive Wear" onerror="this.style.background='#4a3000'">
+      <div class="c-overlay"></div>
+      <div class="c-price">FESTIVE</div>
+      <div class="c-info"><h4>Rani Anarkali</h4><span>Georgette · Embroidery</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT + PROMISE -->
+<section class="promise">
+  <div class="promise-left">
+    <div class="promise-num">02</div>
+    <div class="promise-eyebrow">About Anaya</div>
+    <h2 class="promise-title">Craft that<br><em>breathes</em> heritage.</h2>
+    <p class="promise-body">
+      Anaya Ethnic Wears is a celebration of India's rich heritage and contemporary style. Our collections blend traditional craftsmanship with modern silhouettes to create outfits that are elegant, timeless and made for every celebration.<br><br>
+      We source directly from master weavers — Banarasi silk from Varanasi, Chanderi from Madhya Pradesh, Bandhani from Kutch. Every thread carries a story.
+    </p>
+    <div class="promise-stats">
+      <div class="p-stat"><h3>50+</h3><p>Master<br>Artisans</p></div>
+      <div class="p-stat"><h3>12</h3><p>Regional<br>Crafts</p></div>
+      <div class="p-stat"><h3>100%</h3><p>Natural<br>Fabrics</p></div>
+    </div>
+  </div>
+  <div class="promise-right">
+    <div class="feat-box">
+      <div class="feat-icon">✦</div>
+      <h4>Premium Quality</h4>
+      <p>Only the finest fabrics, sourced from India's heritage weaving clusters with strict quality checks.</p>
+    </div>
+    <div class="feat-box">
+      <div class="feat-icon">🌿</div>
+      <h4>Finest Fabrics</h4>
+      <p>Silk, Chanderi, Georgette, Banarasi — each fabric chosen for its drape, texture and tradition.</p>
+    </div>
+    <div class="feat-box">
+      <div class="feat-icon">🪡</div>
+      <h4>Exquisite Craft</h4>
+      <p>Hand-embroidered by artisans whose families have practiced this craft for generations.</p>
+    </div>
+    <div class="feat-box">
+      <div class="feat-icon">👑</div>
+      <h4>Made For You</h4>
+      <p>Bespoke tailoring available. Your measurements, your occasion, your heirloom piece.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT + MODEL PHOTO -->
+<section class="about">
+  <div class="about-content">
+    <div class="eyebrow">Our Heritage</div>
+    <h2>Rooted in <span>Bharat.</span><br>Worn with Pride.</h2>
+    <p>Each garment at Anaya is a confluence of centuries-old craft and contemporary sensibility — handwoven, hand-embroidered, and made to be passed down through generations.</p>
+    <p>We do not manufacture. We commission art. Each piece takes weeks to complete, shaped by hands that have learned their craft across generations.</p>
+    <div class="about-icons">
+      <div class="about-icon-item"><div class="ico">🧵</div><span>Handcrafted<br>Always</span></div>
+      <div class="about-icon-item"><div class="ico">🌾</div><span>Ethically<br>Sourced</span></div>
+      <div class="about-icon-item"><div class="ico">💎</div><span>Exquisite<br>Craft</span></div>
+      <div class="about-icon-item"><div class="ico">❤️</div><span>Made for<br>You</span></div>
+    </div>
+  </div>
+  <div class="about-right">
+    <img class="about-img-main"
+      src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&q=85"
+      alt="Anaya model" onerror="this.style.background='#1a3d35'">
+    <img class="about-img-accent"
+      src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=300&q=80"
+      alt="Saree detail" onerror="this.style.background='#2a1a00'">
+    <div class="about-badge">
+      <div class="yr">SS</div>
+      <div class="yr-l">2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGING -->
+<section class="packaging">
+  <div class="section-header">
+    <div class="section-eyebrow">The Anaya Experience</div>
+    <h2 class="section-title">Packaging & <em>Identity</em></h2>
+    <p class="section-sub">Every unboxing is a moment of luxury</p>
+  </div>
+  <div class="pack-grid">
+
+    <!-- Box -->
+    <div class="pack-card">
+      <div class="pack-visual">
+        <svg viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
+          <!-- Box lid -->
+          <rect x="10" y="10" width="120" height="16" rx="2" fill="#1a3d35" stroke="#D4AF37" stroke-width=".8"/>
+          <!-- Box body -->
+          <rect x="10" y="24" width="120" height="80" rx="2" fill="#0F2B26" stroke="#D4AF37" stroke-width=".8"/>
+          <!-- Gold border pattern on box -->
+          <rect x="16" y="30" width="108" height="68" rx="1" fill="none" stroke="rgba(212,175,55,.25)" stroke-width=".5"/>
+          <rect x="20" y="34" width="100" height="60" rx="1" fill="none" stroke="rgba(212,175,55,.12)" stroke-width=".4"/>
+          <!-- Lotus center -->
+          <g transform="translate(70,64)">
+            <path d="M0-12 Q-6-6-6 0 Q0-4 0-12Z" fill="rgba(212,175,55,.4)" stroke="#D4AF37" stroke-width=".5"/>
+            <path d="M0-12 Q6-6 6 0 Q0-4 0-12Z" fill="rgba(212,175,55,.4)" stroke="#D4AF37" stroke-width=".5"/>
+            <path d="M0-12 Q-10-4-10 4 Q-4-2 0-12Z" fill="rgba(212,175,55,.25)" stroke="#D4AF37" stroke-width=".4"/>
+            <path d="M0-12 Q10-4 10 4 Q4-2 0-12Z" fill="rgba(212,175,55,.25)" stroke="#D4AF37" stroke-width=".4"/>
+            <circle cy="-2" r="2.5" fill="#D4AF37" opacity=".7"/>
+            <text y="14" text-anchor="middle" font-family="Cinzel,serif" font-size="7" fill="#D4AF37" letter-spacing="2">ANAYA</text>
+            <text y="22" text-anchor="middle" font-family="sans-serif" font-size="4" fill="rgba(212,175,55,.5)" letter-spacing="2">ETHNIC WEARS</text>
+          </g>
+          <!-- Gold ribbon -->
+          <rect x="67" y="24" width="6" height="80" fill="rgba(212,175,55,.15)"/>
+          <rect x="67" y="10" width="6" height="16" fill="rgba(212,175,55,.2)"/>
+          <!-- Bow -->
+          <path d="M70 24 Q60 18 55 22 Q60 26 70 24Z" fill="rgba(212,175,55,.35)" stroke="#D4AF37" stroke-width=".4"/>
+          <path d="M70 24 Q80 18 85 22 Q80 26 70 24Z" fill="rgba(212,175,55,.35)" stroke="#D4AF37" stroke-width=".4"/>
+        </svg>
+      </div>
+      <div class="pack-gold-line"></div>
+      <div class="pack-card-title">Gift Box</div>
+      <div class="pack-card-sub">Premium Dark Forest · Gold Foil</div>
+    </div>
+
+    <!-- Tags -->
+    <div class="pack-card" style="background:var(--beige-lt); border:1px solid rgba(212,175,55,.25);">
+      <div class="pack-visual">
+        <svg viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- Dark tag -->
+          <rect x="8" y="20" width="55" height="90" rx="8" fill="#0F2B26" stroke="#D4AF37" stroke-width=".8"/>
+          <circle cx="35" cy="26" r="5" fill="none" stroke="#D4AF37" stroke-width=".8"/>
+          <line x1="35" y1="14" x2="35" y2="21" stroke="#C8BB9A" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Lotus on dark tag -->
+          <g transform="translate(35,65)">
+            <path d="M0-10 Q-5-5-5 0 Q0-3 0-10Z" fill="rgba(212,175,55,.5)" stroke="#D4AF37" stroke-width=".5"/>
+            <path d="M0-10 Q5-5 5 0 Q0-3 0-10Z" fill="rgba(212,175,55,.5)" stroke="#D4AF37" stroke-width=".5"/>
+            <circle cy="-2" r="2" fill="#D4AF37" opacity=".8"/>
+            <text y="10" text-anchor="middle" font-family="Cinzel,serif" font-size="6" fill="#D4AF37" letter-spacing="2">ANAYA</text>
+            <text y="17" text-anchor="middle" font-family="sans-serif" font-size="3.5" fill="rgba(212,175,55,.5)" letter-spacing="1.5">ETHNIC WEARS</text>
+          </g>
+          <!-- Beige tag -->
+          <rect x="75" y="20" width="55" height="90" rx="8" fill="#F6F3EE" stroke="rgba(212,175,55,.4)" stroke-width=".8"/>
+          <circle cx="102" cy="26" r="5" fill="none" stroke="rgba(212,175,55,.5)" stroke-width=".8"/>
+          <line x1="102" y1="14" x2="102" y2="21" stroke="#C8BB9A" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Pattern on beige tag -->
+          <g transform="translate(102,55)">
+            <path d="M0-14 Q-7-7-7 0 Q0-5 0-14Z" fill="rgba(212,175,55,.2)" stroke="rgba(212,175,55,.5)" stroke-width=".5"/>
+            <path d="M0-14 Q7-7 7 0 Q0-5 0-14Z" fill="rgba(212,175,55,.2)" stroke="rgba(212,175,55,.5)" stroke-width=".5"/>
+            <path d="M0-14 Q-12-5-12 4 Q-5-2 0-14Z" fill="rgba(212,175,55,.12)" stroke="rgba(212,175,55,.35)" stroke-width=".4"/>
+            <path d="M0-14 Q12-5 12 4 Q5-2 0-14Z" fill="rgba(212,175,55,.12)" stroke="rgba(212,175,55,.35)" stroke-width=".4"/>
+            <circle cy="-2" r="2.5" fill="rgba(212,175,55,.7)"/>
+            <text y="14" text-anchor="middle" font-family="Cinzel,serif" font-size="6.5" fill="#0F2B26" letter-spacing="2">ANAYA</text>
+            <text y="22" text-anchor="middle" font-family="sans-serif" font-size="3.5" fill="#6B4E3D" letter-spacing="1.5">ETHNIC WEARS</text>
+          </g>
+        </svg>
+      </div>
+      <div class="pack-gold-line" style="background:rgba(212,175,55,.4)"></div>
+      <div class="pack-card-title" style="color:var(--forest)">Garment Tags</div>
+      <div class="pack-card-sub" style="color:var(--muted)">Forest Dark · Ivory Cream</div>
+    </div>
+
+    <!-- Shopping Bag -->
+    <div class="pack-card">
+      <div class="pack-visual">
+        <svg viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bag body -->
+          <path d="M25 45 L15 120 L125 120 L115 45 Z" fill="#0F2B26" stroke="#D4AF37" stroke-width=".8"/>
+          <!-- Bag top fold -->
+          <rect x="25" y="40" width="90" height="10" rx="1" fill="#1a3d35" stroke="#D4AF37" stroke-width=".6"/>
+          <!-- Handles -->
+          <path d="M45 40 Q45 20 55 20 Q65 20 65 40" fill="none" stroke="#C8BB9A" stroke-width="2" stroke-linecap="round"/>
+          <path d="M75 40 Q75 20 85 20 Q95 20 95 40" fill="none" stroke="#C8BB9A" stroke-width="2" stroke-linecap="round"/>
+          <!-- Gold border on bag -->
+          <rect x="30" y="50" width="80" height="64" rx="1" fill="none" stroke="rgba(212,175,55,.2)" stroke-width=".6"/>
+          <!-- Center logo on bag -->
+          <g transform="translate(70,82)">
+            <path d="M0-12 Q-6-6-6 0 Q0-4 0-12Z" fill="rgba(212,175,55,.4)" stroke="#D4AF37" stroke-width=".5"/>
+            <path d="M0-12 Q6-6 6 0 Q0-4 0-12Z" fill="rgba(212,175,55,.4)" stroke="#D4AF37" stroke-width=".5"/>
+            <circle cy="-2" r="2" fill="#D4AF37" opacity=".7"/>
+            <text y="10" text-anchor="middle" font-family="Cinzel,serif" font-size="7" fill="#D4AF37" letter-spacing="2">ANAYA</text>
+            <text y="18" text-anchor="middle" font-family="sans-serif" font-size="3.5" fill="rgba(212,175,55,.5)" letter-spacing="1.5">ETHNIC WEARS</text>
+          </g>
+          <!-- Floral corner motifs -->
+          <text x="34" y="64" font-size="10" fill="rgba(212,175,55,.15)">✿</text>
+          <text x="104" y="64" font-size="10" fill="rgba(212,175,55,.15)">✿</text>
+          <text x="34" y="112" font-size="10" fill="rgba(212,175,55,.15)">✿</text>
+          <text x="104" y="112" font-size="10" fill="rgba(212,175,55,.15)">✿</text>
+        </svg>
+      </div>
+      <div class="pack-gold-line"></div>
+      <div class="pack-card-title">Shopping Bag</div>
+      <div class="pack-card-sub">Forest Green · Cream Handles</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STORE FRONT -->
+<section class="store-section">
+  <img class="store-bg"
+    src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1400&q=85"
+    alt="Anaya Store" onerror="this.style.background='#0F2B26'">
+  <div class="store-overlay"></div>
+  <div class="store-content">
+    <div class="eyebrow">Visit Us · Experience Anaya</div>
+    <h2>Step into our<br>Atelier</h2>
+    <p>Our flagship store is a sanctuary of craft and culture — where you can touch, feel, and experience every fabric before it becomes yours. Book a private styling session today.</p>
+    <button class="store-btn">Book Appointment</button>
+  </div>
+</section>
+
+<!-- LOOKBOOK -->
+<section class="lookbook">
+  <div class="section-header">
+    <div class="section-eyebrow">Lookbook 2025</div>
+    <h2 class="section-title" style="color:#fff">Worn with <em>Grace</em></h2>
+    <p class="section-sub" style="color:rgba(200,187,154,.4)">A glimpse into the world of Anaya</p>
+  </div>
+  <div class="look-strip">
+    <div class="look-item">
+      <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&q=80" alt="Look 1" onerror="this.style.background='#6b1a1a'">
+      <div class="look-item-label"><span>Gulabi Lehenga</span><small>Bridal Collection</small></div>
+    </div>
+    <div class="look-item">
+      <img src="https://images.unsplash.com/photo-1594938298603-c8148c4b4b37?w=400&q=80" alt="Look 2" onerror="this.style.background='#1a3d35'">
+      <div class="look-item-label"><span>Ivory Sherwani</span><small>Men's Collection</small></div>
+    </div>
+    <div class="look-item">
+      <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400&q=80" alt="Look 3" onerror="this.style.background='#2a1a4a'">
+      <div class="look-item-label"><span>Indigo Banarasi</span><small>Women's Collection</small></div>
+    </div>
+    <div class="look-item">
+      <img src="https://images.unsplash.com/photo-1561365452-adb940139ffa?w=400&q=80" alt="Look 4" onerror="this.style.background='#4a2800'">
+      <div class="look-item-label"><span>Rani Anarkali</span><small>Festive Collection</small></div>
+    </div>
+    <div class="look-item">
+      <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&q=80&crop=bottom" alt="Look 5" onerror="this.style.background='#0f2b26'">
+      <div class="look-item-label"><span>Amber Sharara</span><small>Wedding Collection</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND BOARD — Color Palette -->
+<section class="brand-board">
+  <div class="section-header">
+    <div class="section-eyebrow">Brand Identity</div>
+    <h2 class="section-title">Color <em>Palette</em></h2>
+    <p class="section-sub">The visual language of Anaya</p>
+  </div>
+  <div class="bb-grid">
+    <div class="bb-card">
+      <div class="bb-card-top" style="background:#0F2B26; color:#D4AF37; letter-spacing:4px; font-size:18px;">ANAYA</div>
+      <div class="bb-card-bottom">
+        <h5>Forest Deep</h5>
+        <code>#0F2B26</code>
+      </div>
+    </div>
+    <div class="bb-card">
+      <div class="bb-card-top" style="background:#D4AF37; color:#0F2B26; letter-spacing:4px; font-size:18px;">ANAYA</div>
+      <div class="bb-card-bottom">
+        <h5>Heritage Gold</h5>
+        <code>#D4AF37</code>
+      </div>
+    </div>
+    <div class="bb-card">
+      <div class="bb-card-top" style="background:#C8BB9A; color:#0F2B26; letter-spacing:4px; font-size:18px;">ANAYA</div>
+      <div class="bb-card-bottom">
+        <h5>Aged Beige</h5>
+        <code>#C8BB9A</code>
+      </div>
+    </div>
+    <div class="bb-card">
+      <div class="bb-card-top" style="background:#6B4E3D; color:#F6F3EE; letter-spacing:4px; font-size:18px;">ANAYA</div>
+      <div class="bb-card-bottom">
+        <h5>Sandalwood</h5>
+        <code>#6B4E3D</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- Typography showcase -->
+  <div style="max-width:700px; margin:64px auto 0; text-align:center; padding:48px; background:#fff; border:1px solid rgba(200,187,154,.3);">
+    <div class="section-eyebrow" style="margin-bottom:24px;">Typography</div>
+    <div style="font-family:'Cinzel',serif; font-size:40px; font-weight:700; letter-spacing:8px; color:var(--forest); margin-bottom:8px;">ANAYA</div>
+    <div style="font-size:11px; letter-spacing:5px; color:var(--beige); text-transform:uppercase; font-weight:300; margin-bottom:32px;">ETHNIC WEARS</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; text-align:left;">
+      <div>
+        <div style="font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">Serif — Elegant & Classic</div>
+        <div style="font-family:'Cinzel',serif; font-size:20px; color:var(--forest);">Headlines &amp; Brand</div>
+      </div>
+      <div>
+        <div style="font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">Sans — Modern & Clean</div>
+        <div style="font-family:'Raleway',sans-serif; font-size:15px; color:var(--muted); font-weight:300; letter-spacing:1px;">Body Text &amp; Labels</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">AN<span>A</span>YA</div>
+      <div class="footer-logo-sub">Ethnic Wears</div>
+      <p class="footer-desc">Where ancient craft meets the modern wardrobe. Heirloom couture, rooted in Bharat. Crafted with passion, worn with pride.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Collections</h4>
+      <ul>
+        <li><a href="#">Women's Wear</a></li>
+        <li><a href="#">Men's Wear</a></li>
+        <li><a href="#">Bridal</a></li>
+        <li><a href="#">Wedding</a></li>
+        <li><a href="#">Festive</a></li>
+        <li><a href="#">Accessories</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Anaya</h4>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Artisans</a></li>
+        <li><a href="#">Lookbook</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Atelier</h4>
+      <ul>
+        <li><a href="#">Bespoke</a></li>
+        <li><a href="#">Book Appointment</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">WhatsApp</a></li>
+        <li><a href="#">www.anaya.in</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Crafted with Passion · Worn with Pride</p>
+    <p>© 2025 Anaya Ethnic Wears · All Rights Reserved</p>
+    <div class="social">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Pinterest</a>
+      <a href="#">@anaya.ethnic</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const cur = document.getElementById('cur');
+const curR = document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+(function anim(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(anim);})();
+document.querySelectorAll('button,a,.c-item,.look-item,.pack-card,.hero-photo-col').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='5px';cur.style.height='5px';curR.style.width='52px';curR.style.height='52px';curR.style.opacity='.35';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';curR.style.width='32px';curR.style.height='32px';curR.style.opacity='.55';});
+});
+</script>
+</body>
+</html>
